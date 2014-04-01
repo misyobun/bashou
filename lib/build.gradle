@@ -30,7 +30,7 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository url: "https://github.com/misyobun/bashou" // デプロイ先
+            repository url: "file://${deployTo}" // デプロイ先 // デプロイ先
             pom.version = '0.0.1' // ライブラリバージョン
             pom.groupId = 'jp.co.misyobun' // グループ名
             pom.artifactId = 'Bashou-lib' // アーティファクト名
