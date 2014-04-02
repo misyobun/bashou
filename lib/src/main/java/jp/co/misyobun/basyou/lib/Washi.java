@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * これは和紙です。アプリ内の情報を書き残しましょう。
+ * これは和紙です。
  * Created by takahashinaoto
  */
 public class Washi {
@@ -23,7 +23,13 @@ public class Washi {
      * @param key          キー
      * @return キー値
      */
-    public static String getStringValue(Context context, String key) {
+    public static String getStringValue(final Context context,
+                                        final String key) {
+
+        if (context.getApplicationContext() == null || key == null) {
+            throw new IllegalArgumentException("");
+        }
+
         return context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).getString(key, "");
     }
@@ -34,7 +40,14 @@ public class Washi {
      * @param key      キー
      * @param value    書き込み値
      */
-    public static void putStringValue(Context context, String key, String value) {
+    public static void putStringValue(final Context context,
+                                      final String key,
+                                      final String value) {
+
+        if (context.getApplicationContext() == null || key == null) {
+            throw new IllegalArgumentException("");
+        }
+
         context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).edit().putString(key, value).commit();
     }
@@ -45,7 +58,13 @@ public class Washi {
      * @param key          キー
      * @return キー値
      */
-    public static boolean getBooleanValue(Context context, String key) {
+    public static boolean getBooleanValue(final Context context,
+                                          final String key) {
+
+        if (context.getApplicationContext() == null || key == null) {
+            throw new IllegalArgumentException("");
+        }
+
         return context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).getBoolean(key, false);
     }
@@ -56,7 +75,14 @@ public class Washi {
      * @param key      キー
      * @param flag     書き込み値
      */
-    public static void putBooleanValue(Context context, String key, boolean flag) {
+    public static void putBooleanValue(final Context context,
+                                       final String key,
+                                       final boolean flag) {
+
+        if (context.getApplicationContext() == null || key == null) {
+            throw new IllegalArgumentException("");
+        }
+
         context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).edit().putBoolean(key, flag).commit();
     }
@@ -67,7 +93,13 @@ public class Washi {
      * @param key          キー
      * @return キー値(初期値:0)
      */
-    public static int getIntValue(Context context, String key) {
+    public static int getIntValue(final Context context,
+                                  final String key) {
+
+        if (context.getApplicationContext() == null || key == null) {
+            return 0;
+        }
+
         return context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).getInt(key, 0);
     }
@@ -78,7 +110,14 @@ public class Washi {
      * @param key      キー
      * @param value    書き込む値
      */
-    public static void putIntValue(Context context, String key, int value) {
+    public static void putIntValue(final Context context,
+                                   final String key,
+                                   final int value) throws NullPointerException{
+
+        if (context.getApplicationContext() == null || key == null) {
+            throw new IllegalArgumentException("");
+        }
+
         context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).edit().putInt(key, value).commit();
     }
@@ -88,15 +127,25 @@ public class Washi {
      * @param context
      * @return 共有リファレンス
      */
-    public static SharedPreferences getSharedPreference(Context context) {
+    public static SharedPreferences getSharedPreference(final Context context) {
+
+        if (context.getApplicationContext() == null) {
+            throw new IllegalArgumentException("");
+        }
+
         return context.getSharedPreferences(Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE);
     }
 
     /**
      * アプリケーション用の共有リファレンを期化する
-     * @param context
+     * @param context コンテキスト
      */
-    public static void clear(Context context){
+    public static void clear(final Context context){
+
+        if (context.getApplicationContext() == null) {
+            throw new IllegalArgumentException("");
+        }
+
         context.getApplicationContext().getSharedPreferences(
                 Washi.SHARED_PREFERENCE_CONFIG, Context.MODE_PRIVATE).edit().clear().commit();
 
